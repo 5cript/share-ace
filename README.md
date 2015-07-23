@@ -1,11 +1,19 @@
-# Share-CodeMirror [![Build Status](https://secure.travis-ci.org/share/share-codemirror.png)](http://travis-ci.org/share/share-codemirror) [![Dependencies](https://david-dm.org/share/share-codemirror.png)](https://david-dm.org/share/share-codemirror) [![devDependency Status](https://david-dm.org/share/share-codemirror/dev-status.png)](https://david-dm.org/share/share-codemirror#info=devDependencies)
-CodeMirror bindings for ShareJS >= 0.7.x.
+# Share-Ace
+Ace bindings for ShareJS >= 0.7.x.
+Crude fork from Share-CodeMirror.
 
 ## Usage
 
 ```javascript
-var cm = CodeMirror.fromTextArea(elem);
-shareDoc.attachCodeMirror(cm);
+var aceEdit;
+
+onload = function() {
+  aceEdit = ace.edit("editor");
+};
+
+doc.whenReady(function () {
+  doc.attachAce(aceEdit);
+}
 ```
 
 That's it. You now have 2-way sync between your ShareJS and CodeMirror.
@@ -13,28 +21,28 @@ That's it. You now have 2-way sync between your ShareJS and CodeMirror.
 ## Install with Bower
 
 ```
-bower install share-codemirror
+bower install git://github.com/5cript/share-ace
 ```
 
 ## Install with NPM
 
 ```
-npm install share-codemirror
+npm install git://github.com/5cript/share-ace
 ```
 
-On Node.js you can mount the `scriptsDir` (where `share-codemirror.js` lives) as a static resource
+On Node.js you can mount the `scriptsDir` (where `share-ace.js` lives) as a static resource
 in your web server:
 
 ```javascript
-var shareCodeMirror = require('share-codemirror');
+var shareAce = require('share-ace');
 // This example uses express.
-app.use(express.static(shareCodeMirror.scriptsDir));
+app.use(express.static(shareAce.scriptsDir));
 ```
 
 In the HTML:
 
 ```html
-<script src="/share-codemirror.js"></script>
+<script src="/share-ace.js"></script>
 ```
 
 ## Try it out
@@ -51,34 +59,4 @@ Wait for poetry to appear.
 
 ## Run tests
 
-```
-npm install
-npm test
-```
-
-With test coverage:
-
-```
-node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -u exports
-open coverage/lcov-report/index.html
-```
-
-## Release process
-
-```
-npm outdated --depth 0 # See if you can upgrade something
-```
-
-* Modify version in `bower.json` (not in `package.json`)
-* Update `History.md`
-* Commit
-
-Then run:
-
-```
-npm version `jq -r < bower.json .version`
-npm publish
-git push --tags
-```
-
-There is no `bower publish` - the existance of a git tag is enough.
+Tests are currently not available. <- FIXME

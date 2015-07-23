@@ -1,5 +1,5 @@
 {
-  "name": "share-codemirror",
+  "name": "share-ace",
   "version": "0.1.0",
   "description": "CodeMirror bindings for ShareJS",
   "main": "share-codemirror.js",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/share/share-codemirror.git"
   },
-  "keywords": [
+  "keyworsds": [
     "codemirror",
     "sharejs"
   ],
@@ -27,6 +27,6 @@
     "jsdom": "0.8.8",
     "livedb": "^0.4.9",
     "mocha": "^2.0.1",
-    "share": "^0.7.3"
+    "share": "git+https://github.com/share/ShareJS.git"
   }
 }

@@ -1,67 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/codemirror.css">
-<script src="/codemirror.js"></script>
-<script src="/channel/bcsocket.js"></script>
-<script src="/share.uncompressed.js"></script>
-<script src="/share-codemirror.js"></script>
+  <link rel="stylesheet" href="/codemirror.css">
+  <script src="/codemirror.js"></script>
+  <!-- <script src="/channel/bcsocket.js"></script> -->
+  <!-- <script src="/share.uncompressed.js"></script> --->
+  <script src="../src/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../node_modules/browserchannel/dist/bcsocket.js"></script>
+  <script src="../node_modules/share/dist/share.js"></script>
+  <script src="/share-ace.js"></script>
+
+  <style>
+    #editor {
+      position: absolute;
+      width: 500px;
+      height: 400px;
+    }
+  </style>
 </head>
 <body>
-<textarea id="pad">Connecting...</textarea>
-<button id="monkey">Infinite Monkey</button>
-<script>
-var elem = document.getElementById('pad');
-var cm = CodeMirror.fromTextArea(elem, {
-  mode: "text/plain"
-});
+  <!-- <textarea id="pad">Connecting...</textarea> -->
+  <div id="editor">
+  </div>
 
-var s = new BCSocket(null, {reconnect: true});
-var sjs = new window.sharejs.Connection(s);
-var doc = sjs.get('users', 'sephx');
+  <script>
+  var aceEdit;
 
-doc.subscribe();
-doc.whenReady(function () {
-  if (!doc.type) doc.create('text');
-  if (doc.type && doc.type.name === 'text') {
-    doc.attachCodeMirror(cm);
-  }
-});
+  onload = function() {
+    aceEdit = ace.edit("editor");
+  };
 
-document.getElementById('monkey').onclick = function() {
-  setInterval(monkeyType, 50);
-};
+  var s = new BCSocket(null, {reconnect: true});
+  var sjs = new sharejs.Connection(s);
+  var doc = sjs.get('users', 'sephx');
 
-function monkeyType() {
-  var textLength = cm.getValue().length;
-  var pos = Math.floor(Math.random()*textLength);
-  var from = cm.posFromIndex(pos);
-  var editLength = randomInt(10)
-  if(Math.random() < 0.9) {
-    // Add text
-    var text =  randomString(editLength);
-    cm.replaceRange(text, cm.posFromIndex(pos));
-  } else {
-    var endIndex = Math.max(pos + editLength, textLength-1);
-    var to = cm.posFromIndex(endIndex);
-    cm.replaceRange('', from, to);
-  }
-}
+  doc.subscribe();
+  doc.whenReady(function () {
+    if (!doc.type) doc.create('text');
+    if (doc.type && doc.type.name === 'text') {
+      doc.attachAce(aceEdit);
+    }
+  });
 
-function randomString(len) {
-	var chars = "0123456789\nABCDEF\nGHIJKLM\nNOPQRSTUVWXTZ\nabcde\nfghiklmnop\nqrstuvwxyz";
-	var result = '';
-	for (var i=0; i<len; i++) {
-		var rnum = randomInt(chars.length);
-		result += chars.substring(rnum, rnum+1);
-	}
-  return result;
-}
+  //########################################################################
 
-function randomInt(max) {
-  return Math.floor(Math.random()*max);
-}
-
-</script>
+  </script>
 </body>
 </html>
