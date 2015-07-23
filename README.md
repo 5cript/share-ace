@@ -1,5 +1,6 @@
 # Share-Ace
 Ace bindings for ShareJS >= 0.7.x.
+
 Crude fork from Share-CodeMirror.
 
 ## Usage
@@ -53,9 +54,6 @@ node examples/server.js
 # in a couple of browsers...
 open http://localhost:7007
 ```
-
-Try clicking the infinite monkeys button. Do it in both browsers.
-Wait for poetry to appear.
 
 ## Run tests
 
