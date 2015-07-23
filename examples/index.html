@@ -25,6 +25,7 @@
 
   <script>
   var aceEdit;
+  Range = require("ace/range").Range;
 
   onload = function() {
     aceEdit = ace.edit("editor");
@@ -38,7 +39,7 @@
   doc.whenReady(function () {
     if (!doc.type) doc.create('text');
     if (doc.type && doc.type.name === 'text') {
-      doc.attachAce(aceEdit);
+      doc.attachAce(Range, aceEdit);
     }
   });
 
