@@ -2,7 +2,6 @@
   'use strict';
 
   //var requireImpl = ace.require != null ? ace.require : require;
-  var Range = require('ace/range').Range;
 
   var offsetToPos = function(editor, offset) {
     var line, lines, row, _i, _len;
@@ -26,7 +25,7 @@
    * @param editor - Ace instance
    * @param ctx - Share context
    */
-  function shareAce(editor, ctx) {
+  function shareAce(Range, editor, ctx) {
     if (!ctx.provides.text) throw new Error('Cannot attach to non-text document');
 
     var suppress = false;
@@ -140,10 +139,9 @@
       });
     } else {
       // Browser, no AMD
-      window.sharejs.Doc.prototype.attachAce = function (editor, ctx) {
+      window.sharejs.Doc.prototype.attachAce = function (Range, editor, ctx) {
         if (!ctx) ctx = this.createContext();
-        console.log('D');
-        shareAce(editor, ctx);
+        shareAce(Range, editor, ctx);
       };
     }
   }
