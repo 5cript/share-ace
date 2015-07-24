@@ -4,5 +4,8 @@
   "main": "share-ace.js",
   "ignore": [
     "node_modules"
-  ]
+  ],
+  "dependencies": {
+    "ace-builds": "~1.2.0"
+  }
 }
