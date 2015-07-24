@@ -52,6 +52,7 @@ In the HTML:
 npm install
 # currently necessary due to outdated npm package
 cd node_modules/share && npm install && make && cd ../..
+bower install
 node examples/server.js
 # in a couple of browsers...
 open http://localhost:7007
