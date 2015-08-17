@@ -1,10 +1,11 @@
 {
   "name": "share-ace",
-  "version": "0.1.0",
-  "description": "CodeMirror bindings for ShareJS",
-  "main": "share-codemirror.js",
+  "version": "0.1.1",
+  "description": "ACE bindings for ShareJS",
+  "main": "share-ace.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "postinstall": "cd ./node_modules/share && npm install && make" 
   },
   "repository": {
     "type": "git",
@@ -13,12 +14,16 @@
   "keyworsds": [
     "codemirror",
     "sharejs"
-  ],
-  "author": "Aslak Hellesøy",
+  ], 
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/share/share-codemirror/issues"
   },
+  "contributors" : [
+    "Maximilian Klein <dasmaxl@gmail.com> (https://github.com/LittleHelicase)",
+    "Maik Marschner (https://github.com/leMaik)",
+    "Tim Ebbeke (https://github.com/5cript)"
+  ],
   "devDependencies": {
     "browserchannel": "^2.0.0",
     "codemirror": "^4.8.0",
