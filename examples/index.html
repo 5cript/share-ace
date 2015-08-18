@@ -11,6 +11,8 @@
       position: absolute;
       width: 500px;
       height: 400px;
+      background-color: #303030;
+      color: #FFFFFF;
     }
   </style>
 </head>
@@ -20,23 +22,24 @@
   </div>
 
   <script>
+  //########################################################################
+
   var aceEdit;
   Range = require("ace/range").Range;
 
-  onload = function() {
-    aceEdit = ace.edit("editor");
-  };
-
-  var s = new BCSocket(null, {reconnect: true});
-  var sjs = new sharejs.Connection(s);
-  var doc = sjs.get('users', 'sephx');
+  var ws = new WebSocket('ws://localhost:8005');
+  var sjs = new window.sharejs.Connection(ws);
+  var doc = sjs.get('kekse', 'sharejs_example');
 
   doc.subscribe();
   doc.whenReady(function () {
-    if (!doc.type) doc.create('text');
-    if (doc.type && doc.type.name === 'text') {
-      doc.attachAce(Range, aceEdit);
-    }
+    setTimeout(function () {
+      if (!doc.type) doc.create('text');
+      if (doc.type && doc.type.name === 'text') {
+        aceEdit = ace.edit("editor");
+        doc.attachAce(Range, aceEdit);
+      }
+    });
   });
 
   //########################################################################

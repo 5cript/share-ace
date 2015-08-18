@@ -64,6 +64,7 @@
     editor.on('change', onLocalChange);
 
     function onLocalChange(change) {
+      debugger;
       if (suppress) return true;
       applyToShareJS(editor, change);
       check();
